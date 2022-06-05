@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <title>TicTakToe</title>
+        <style type="text/css">
+            #div1,#div2,#div3,#div4,#div5,#div6,#div7,#div8,#div9{
+                border: 1px solid black;
+                height: 200px;
+                width: 200px;
+                float: left;
+                background-color: aqua;
+                font-size: 150px;
+                font-family: Verdana, Geneva, Tahoma, sans-serifs;
+                text-align: center;
+                display: block;
+                margin: auto;
+            }
+            #div1,#div4,#div7{
+                clear: left;
+                border-left: none;
+            }
+            #div1,#div2,#div3{
+                border-top: none;
+            }
+            #div3,#div6,#div9{
+                border-right: none;
+            }
+            #div7,#div8,#div9{
+                border-bottom: none;
+            }
+            #main{
+                display: block;
+                margin: auto;
+                margin-left: 400px;
+            }
+            #heading{
+                text-align: center;
+                font-style: italic;
+            }
+            #message{
+                text-align: center;
+                color:red;
+                text-shadow: 10px;
+                 text-decoration-color: aqua;
+            }
+            #button1{
+                font-size: 20px;
+                text-align: center;
+                display: block;
+                margin: auto;
+            }
+            </style>
+            <script>
+                var count=1;
+                function fill(control)
+                {
+                    if(count<=9)
+                    {
+                        if(count%2!=0)
+                    {
+                        document.getElementById(control.id).innerHTML="X";
+                    }
+                    else
+                    {
+                        document.getElementById(control.id).innerHTML="O";
+                    }
+                    count++;
+                    if(checkwin())
+                    {
+                        document.getElementById('heading').innerHTML="WINNNER";
+                        document.getElementById('message').innerHTML="-CLICK ON RESTART AND PLAY AGAIN-";
+                        
+                    }
+                    }
+                    else
+                    {
+                        alert("match drawn");
+                        reset();
+                    }
+                    
+                }
+                function reset()
+                {
+                    for(var i=1;i<=9;i++)
+                    {
+                        document.getElementById('div'+i).innerHTML="";
+                    }
+                    count=1;
+                }
+                function checkwin()
+                {
+                    if(winner('div1','div2','div3') || winner('div4','div5','div6') || winner('div7','div8','div9') || winner('div1','div4','div7') || winner('div2','div5','div8') || winner('div3','div6','div9') || winner('div1','div5','div9') || winner('div3','div5','div7'))
+                    {
+                        return true;
+                    }
+                }
+                function winner(div1,div2,div3)
+                {
+                    if(gett(div1)!="" && gett(div2)!="" && gett(div3)!="" && gett(div1)==gett(div2) && gett(div2)==gett(div3))
+                    {
+                        return true;
+                    }
+                }
+                function gett(div)
+                {
+                    return document.getElementById(div).innerHTML;
+                }
+               function restart()
+               {
+                   reset();
+                   document.getElementById('heading').innerHTML="-PLAY-";
+                   document.getElementById('message').innerHTML="";
+               }
+            </script>
+    </head>
+    <body background="C:\Users\RT\OneDrive\Desktop\game.jpg">
+        <h1 id="heading">-PLAY-</h1><br>
+        <h1 id="message"></h1>
+        <button id="button1" onclick="restart()">RESTART</button><br>
+     <div id="main">
+         <div id="div1" onclick="fill(this)"></div>
+         <div id="div2" onclick="fill(this)"></div>
+         <div id="div3" onclick="fill(this)"></div>
+         <div id="div4" onclick="fill(this)"></div>
+         <div id="div5" onclick="fill(this)"></div>
+         <div id="div6" onclick="fill(this)"></div>
+         <div id="div7" onclick="fill(this)"></div>
+         <div id="div8" onclick="fill(this)"></div>
+         <div id="div9" onclick="fill(this)"></div>
+    </div>
+    </body>
+</html>
